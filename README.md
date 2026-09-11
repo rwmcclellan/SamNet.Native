@@ -12,7 +12,6 @@ Caller  ──► ConcurrentQueue  ──►  SamWorker (background task)
 │  
 Caller  ◄── UiMessage / SamDetection callbacks  ◄────────┘  
 
-
 1. Caller enqueues a task (`LoadModel`, `LoadImage`, `Encode`, `Sam2Point`, `Sam3Prompt`, …).
 2. The worker thread dequeues and executes the task against the native library.
 3. When detections are produced, the worker immediately raises a callback with the mask data.
@@ -71,14 +70,17 @@ queue.Enqueue(new MessageToWorker(MessageEnum.Task, "Sam3Prompt", promptMessage)
 
 // 4. When finished
 queue.Enqueue(new MessageToWorker(MessageEnum.Quit));
+```
 
-# Image Requirements
+## Image Requirements
 
 Format: tightly-packed RGB (3 bytes per pixel)
 Layout: row-major, no padding
 The same image must be loaded + encoded before any segmentation call
 
-# Detection Results
+## Models
+
+## Detection Results
 Each SamDetection delivered via the callback contains:
 
 MaskData – byte[] of length Width * Height (0/255 binary mask)
@@ -86,10 +88,17 @@ Width / Height
 Score and IoU (when available)
 Optional bounding box
 
-# License
+## License
 MIT – see LICENSE
 
-# Acknowledgements
+## Usage Example
+In project SamNet - Available soon
+
+## Next Steps
+Make video interface available.  No short term plan for completion
+Video requires each frame to be encoded which takes the longest time for all tasks to complete.  Will require time to design and test satisfactorily.  
+
+## Acknowledgements
 
 sam3.cpp by PABannier
 Meta AI for the original Segment Anything models
