@@ -78,6 +78,55 @@ Format: tightly-packed RGB (3 bytes per pixel)
 Layout: row-major, no padding  
 The same image must be loaded + encoded before any segmentation call
 
+## Callbacks
+
+To register a callback
+
+```csharp
+ Action<UiMessage> UiMessageCallBack = new Action<UiMessage>(UiCallback);
+```
+
+WPF Implementation - uses dispatcher to to handle thread switch
+
+```csharp
+private void UiCallback (UiMessage uimess)
+{
+    Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() =>
+    {
+        if (uimess.Code == UiEnum.StatusMessage) {}
+        else if (uimess.Code == UiEnum.Exception)
+        {
+             if (uimess.Ob is Exception) {}
+        }
+        else if (uimess.Code == UiEnum.ReadyToQuit) {}
+        else if (uimess.Code == UiEnum.TaskCompleted)
+        {                    
+            if (uimess.Message.Equals("LoadModel"))
+            {  
+                if (uimess.Ob is SamResult) {}                       
+            }
+            else if (uimess.Message.Equals("LoadImage")) {}
+            else if (uimess.Message.Equals("Encode"))
+             {
+		        if (uimess.Ob is SamResult) {} 
+             }
+             else if (uimess.Message.Equals("Sam2Point"))
+            {
+                if (uimess.Ob is SamResult) {} 
+            }
+            else if (uimess.Message.Equals("Sam3Prompt"))
+            {
+                if (uimess.Ob is SamResult) {}
+            }
+        }
+        else if (uimess.Code == UiEnum.SamDetection)
+        {
+            if (uimess.Ob is SamDetection) {}
+        }
+    }));
+}
+  ```         
+
 ## Models
 
 All models are available in GGML format on PABannier's Hugging Face repository   
