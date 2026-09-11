@@ -80,13 +80,13 @@ The same image must be loaded + encoded before any segmentation call
 
 ## Models
 
-All models are available in GGML format on PABannier's Hugging Face repository 
-Refer "Model Zoo" section of About at [sam3.cpp](https://github.com/PABannier/sam3.cpp)
+All models are available in GGML format on PABannier's Hugging Face repository   
+Refer to "Model Zoo" section of About at [sam3.cpp](https://github.com/PABannier/sam3.cpp) for link  
 52 model files covering 4 architectures x multiple sizes x up to 5 precisions.
 
 Only about 10% of the models were tested and some are not a fit for this class library
 
-A few of the tested models:
+A few of the tested models:  
 sam2.1_hiera_tiny_f32.ggml (Sam2.1 - Encode process takes about 6 seconds on an I5 laptop with no acceleration)  
 sam3-f16.ggml (Sam3 - Encode process takes about 90 seconds on an I5 laptop with no acceleration)
 
