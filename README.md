@@ -74,8 +74,8 @@ queue.Enqueue(new MessageToWorker(MessageEnum.Quit));
 
 ## Image Requirements
 
-Format: tightly-packed RGB (3 bytes per pixel)
-Layout: row-major, no padding
+Format: tightly-packed RGB (3 bytes per pixel)  
+Layout: row-major, no padding  
 The same image must be loaded + encoded before any segmentation call
 
 ## Models
@@ -83,9 +83,9 @@ The same image must be loaded + encoded before any segmentation call
 ## Detection Results
 Each SamDetection delivered via the callback contains:
 
-MaskData – byte[] of length Width * Height (0/255 binary mask)
-Width / Height
-Score and IoU (when available)
+MaskData – byte[] of length Width * Height (0/255 binary mask)  
+Width / Height  
+Score and IoU (when available)  
 Optional bounding box
 
 ## License
@@ -95,11 +95,12 @@ MIT – see LICENSE
 In project SamNet - Available soon
 
 ## Next Steps
-Make video interface available.  No short term plan for completion
-Video requires each frame to be encoded which takes the longest time for all tasks to complete.  Will require time to design and test satisfactorily.  
+Make video interface available.  No short term plan for completion  
+Video requires each frame to be encoded which takes the longest time for all tasks to complete.   
+Will require time to design and test satisfactorily.  
 
 ## Acknowledgements
 
-sam3.cpp by PABannier
-Meta AI for the original Segment Anything models
+sam3.cpp by PABannier  
+Meta AI for the original Segment Anything models  
 AI support from Grok, Perplexity and ChatGPT
