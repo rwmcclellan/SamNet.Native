@@ -36,31 +36,7 @@ var queue = new ConcurrentQueue<object>();
 var config = new WorkerConfig { DebugLevel = 1 };
 var worker = new SamWorker(config, queue);
 
-// 2. Wire up callbacks
-worker.SetActionDestinations(
-    uiMsg =>
-    {
-        switch (uiMsg.Code)
-        {
-            case UiEnum.SamDetection:
-                var det = uiMsg.Ob as SamDetection;
-                // det.MaskData (byte[]), det.Width, det.Height, det.Score, ...
-                break;
-
-            case UiEnum.TaskCompleted:
-                // Handle success / failure of the last command
-                break;
-
-            case UiEnum.Exception:
-            case UiEnum.StatusMessage:
-                // Logging / error handling
-                break;
-        }
-    },
-    byteMsg => { /* optional raw byte-array messages */ }
-);
-
-// 3. Enqueue work
+// 2. Enqueue work
 queue.Enqueue(new MessageToWorker(MessageEnum.Task, "LoadModel", @"C:\models\sam3-q4.gguf"));
 queue.Enqueue(new MessageToWorker(MessageEnum.Task, "LoadImage", new ImageInfo(rgbBytes, height, width)));
 queue.Enqueue(new MessageToWorker(MessageEnum.Task, "Encode"));
@@ -68,7 +44,7 @@ queue.Enqueue(new MessageToWorker(MessageEnum.Task, "Sam2Point", samMessage));
 // or
 queue.Enqueue(new MessageToWorker(MessageEnum.Task, "Sam3Prompt", promptMessage));
 
-// 4. When finished
+// 3. When finished
 queue.Enqueue(new MessageToWorker(MessageEnum.Quit));
 ```
 
