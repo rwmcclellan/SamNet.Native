@@ -17,7 +17,7 @@ namespace SamNet.Native
         private Sam3Model? Sam;
         private byte[] ImageData;
         private int ImageWidth = 0;
-        private int ImageHeight = 0;
+        private int ImageHeight = 0;    
 
         public SamWorker(WorkerConfig ipc, ConcurrentQueue<Object>? mtw)
         {
@@ -106,12 +106,23 @@ namespace SamNet.Native
                                         ImageData = ((ImageInfo)mess.Ob).Data;
                                         ImageHeight = ((ImageInfo)mess.Ob).Rows;
                                         ImageWidth = ((ImageInfo)mess.Ob).Cols;
-                                        UiMessage uim = new UiMessage(UiEnum.TaskCompleted, "LoadImage", true);
-                                        UiMessageAction?.Invoke(uim);
+                                        if (ImageData.Length == (ImageHeight*ImageWidth*3))
+                                        {
+                                            SamResult SamStatus = new SamResult(true, "Image loaded successfully");
+                                            UiMessage uim = new UiMessage(UiEnum.TaskCompleted, "LoadImage", SamStatus);
+                                            UiMessageAction?.Invoke(uim);
+                                        }
+                                        else
+                                        {
+                                            SamResult SamStatus = new SamResult(false, "Incorrect image data size");
+                                            UiMessage uim = new UiMessage(UiEnum.TaskCompleted, "LoadImage", SamStatus);
+                                            UiMessageAction?.Invoke(uim);
+                                        }                                        
                                     }
                                     else
                                     {
-                                        UiMessage uim = new UiMessage(UiEnum.TaskCompleted, "LoadImage", false);
+                                        SamResult SamStatus = new SamResult(false, "Incorrect data type sent to Encode");
+                                        UiMessage uim = new UiMessage(UiEnum.TaskCompleted, "LoadImage", SamStatus);
                                         UiMessageAction?.Invoke(uim);
                                     }
                                 }
@@ -125,7 +136,8 @@ namespace SamNet.Native
                                     }
                                     else
                                     {
-                                        UiMessage uim = new UiMessage(UiEnum.TaskCompleted, "LoadModel", "Incorrect data type sent to Encode");
+                                        SamResult SamStatus = new SamResult(false, "Incorrect data type sent to Encode");
+                                        UiMessage uim = new UiMessage(UiEnum.TaskCompleted, "LoadModel", SamStatus);
                                         UiMessageAction?.Invoke(uim);
                                     }
                                 }
