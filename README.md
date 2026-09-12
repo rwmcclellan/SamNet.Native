@@ -28,6 +28,12 @@ Caller  ◄── UiMessage / SamDetection callbacks  ◄───────�
 | `Sam3Prompt`   | Text-prompted concept segmentation (SAM 3)       | `SamMessage` / prompt object    |
 | `Quit`         | Shut down the worker and free native resources   | —                               |
 
+## Image Requirements
+
+Format: tightly-packed RGB (3 bytes per pixel)  
+Layout: row-major, no padding  
+The same image must be loaded + encoded before any segmentation call
+
 ## Typical Usage Flow
 
 ```csharp
@@ -48,12 +54,6 @@ queue.Enqueue(new MessageToWorker(MessageEnum.Task, "Sam3Prompt", promptMessage)
 queue.Enqueue(new MessageToWorker(MessageEnum.Quit));
 ```
 
-## Image Requirements
-
-Format: tightly-packed RGB (3 bytes per pixel)  
-Layout: row-major, no padding  
-The same image must be loaded + encoded before any segmentation call
-
 ## Callbacks
 
 To register a callback
@@ -62,7 +62,7 @@ To register a callback
  Action<UiMessage> UiMessageCallBack = new Action<UiMessage>(UiCallback);
 ```
 
-WPF Implementation - uses dispatcher to to handle thread switch
+WPF Implementation - uses dispatcher to handle thread switch to UI
 
 ```csharp
 private void UiCallback (UiMessage uimess)
@@ -81,11 +81,14 @@ private void UiCallback (UiMessage uimess)
             {  
                 if (uimess.Ob is SamResult) {}                       
             }
-            else if (uimess.Message.Equals("LoadImage")) {}
-            else if (uimess.Message.Equals("Encode"))
-             {
+            else if (uimess.Message.Equals("LoadImage")) 
+			{
 		        if (uimess.Ob is SamResult) {} 
-             }
+			}
+            else if (uimess.Message.Equals("Encode"))
+			{
+		        if (uimess.Ob is SamResult) {} 
+			}
              else if (uimess.Message.Equals("Sam2Point"))
             {
                 if (uimess.Ob is SamResult) {} 
