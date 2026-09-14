@@ -139,6 +139,6 @@ Will require time to design and test satisfactorily.
 
 ## Acknowledgements
 
-sam3.cpp by PABannier  
+[sam3.cpp](https://github.com/pabannier/sam3.cpp)  by PABannier   
 Meta AI for the original Segment Anything models  
 AI support from Grok, Perplexity and ChatGPT
