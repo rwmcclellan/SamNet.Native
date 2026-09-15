@@ -4,12 +4,15 @@ SamNet.Native is licensed under the MIT license
 
 It includes or depends on the following third-party components:
 
-## sam3.cpp (and ggml)
+## sam3.cpp
 - License: MIT
 - Original author: Pierre-Antoine Bannier (PABannier)
 - Repository: https://github.com/PABannier/sam3.cpp
   (and/or https://github.com/rwmcclellan/sam3.cpp)
 - Notes: Native inference engine used via SamNet.Native.
+
+## ggml
+ — MIT, Georgi Gerganov / ggml.ai (via PABannier's fork)
 
 ## Segment Anything model weights
 
