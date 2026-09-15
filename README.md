@@ -126,9 +126,6 @@ Width / Height
 Score and IoU (when available)  
 Optional bounding box
 
-## License
-MIT – see LICENSE
-
 ## Usage Example
 
 - [SamNet](https://github.com/rwmcclellan/SamNet) - WPF (GNU General Public License v3.0 License)
@@ -136,7 +133,15 @@ MIT – see LICENSE
 ## Next Steps
 Make video interface available.  No short term plan for completion  
 Video requires each frame to be encoded which takes the longest time for all tasks to complete.   
-Will require time to design and test satisfactorily.  
+Will require time to design and test satisfactorily. 
+
+## License
+MIT – see LICENSE
+
+## Incorporated components license information
+
+[Meta Sam3 License](https://sam3ai.com/license/) - Meta Sam3 Model Weights  
+[Meta Sam2 License](https://github.com/facebookresearch/sam2) - Meta Sam2 Model Weights - Licensed under the Apache License, Version 2.0  
 
 ## Acknowledgements
 
