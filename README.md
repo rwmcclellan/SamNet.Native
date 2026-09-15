@@ -130,7 +130,8 @@ Optional bounding box
 MIT – see LICENSE
 
 ## Usage Example
-In project SamNet - Available soon
+
+- [SamNet](https://github.com/rwmcclellan/SamNet) - WPF (GNU General Public License v3.0 License)
 
 ## Next Steps
 Make video interface available.  No short term plan for completion  
